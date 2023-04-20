@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('') {
+    stage('error') {
       steps {
         script {
           checkout scm
@@ -19,6 +19,6 @@ pipeline {
 
   }
   environment {
-    registry = 'Ucha0792/testlab'
+    registry = 'ucha0792/testlab'
   }
 }
