@@ -84,7 +84,7 @@ pipeline {
        
       }
     } 
-  }
+  
  stage('Deploy') {
   steps{
     sh 'docker stop flask-app || true; docker rm flask-app || true; docker run -d --name flask-app -p 9000:9000 ucha0792/testlab:latest'
@@ -95,7 +95,7 @@ stage('Validation') {
     sh 'sleep 5; curl -i http://localhost:9000/test_string'
   }
 }
-  }
+  
   environment {
     registry = 'ucha0792/testlab'
   }
