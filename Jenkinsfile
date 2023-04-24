@@ -5,12 +5,21 @@ pipeline {
       steps {
         script {
           checkout scm
-          def    customImage = docker.build("${registry}:${env.BUILD_ID}")
+          def customImage = docker.build("${registry}:${env.BUILD_ID}")
         }
 
       }
     }
-
+    stage('Publish'){
+      steps {
+        script {
+          docker.withRegistry('', 'dockerhub-id') {
+            docker.image("${registry}:${env.BUILD_ID}").push('latest')
+          }
+        } 
+       
+      }
+    } 
   }
   environment {
     registry = 'ucha0792/testlab'
