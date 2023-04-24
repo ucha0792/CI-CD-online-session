@@ -13,14 +13,14 @@ pipeline {
             . .venv/bin/activate
             pip install pylint
             pip install -r requirements.txt
-            pylink --exit-zero --report=y --output-format=json:pylint-report.json,colorized ../*.py
+            pylint --exit-zero --report=y --output-format=json:pylint-report.json,colorized ./*.py
             '''
             publishHTML target : [
                   allowMissing: true,
                   alwaysLinkToLastBuild: true,
                   keepAll: true,
                   reportDir: './',
-                  reportFiles: 'pylink-report.json',
+                  reportFiles: 'pylint-report.json',
                   reportName: 'pylint Scan',
                   reportTitles: 'pylint Scan'
               ]
