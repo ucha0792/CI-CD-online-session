@@ -53,6 +53,15 @@ pipeline {
         }
       }
     }
+    stage('Scan Docer Image for Vulnerabilities') {
+      steps {
+        script {
+           sh 'mkdir -p reports' 
+            def vulnerabilities = sh(script: "trivy image --exit-code 0 --severity HIGH,MEDIUM,LOW --format template '@html.tpl' -o reports/image-scan.html --no-progress ${registry}:${env.BUILD_ID}", returnStdout: true).trim()
+            echo "Vulnerability Report:\n${vulnerabilities}"
+          }
+        }        
+      }
     stage('Publish'){
       steps {
         script {
