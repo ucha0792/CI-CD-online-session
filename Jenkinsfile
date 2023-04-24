@@ -99,4 +99,4 @@ stage('Validation') {
   environment {
     registry = 'ucha0792/testlab'
   }
-}
+
