@@ -10,7 +10,7 @@ pipeline {
             pwd
             mount
             python -m venv .venv
-            . .venv/bin/activare
+            . .venv/bin/activate
             pip install pylint
             pip install -r requirements.txt
             pylink --exit-zero --report=y --output-format=json:pylint-report.json,colorized ../*.py
