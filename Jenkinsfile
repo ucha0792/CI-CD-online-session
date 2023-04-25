@@ -80,10 +80,19 @@ pipeline {
           docker.withRegistry('', 'dockerhub-id') {
             docker.image("${registry}:${env.BUILD_ID}").push('latest')
           }
-        } 
-       
+        }       
       }
     } 
+    stage('Deploy') {
+  steps{
+    sh 'docker stop testlab || true; docker rm testlab || true; docker run -d --name testlab -p 9000:9000 ucha0792/testlab:latest'
+  }
+}
+    stage('Validation') {
+  steps{
+    sh 'sleep 5; curl -i http://localhost:9000/test_string'
+  }
+}
   }
   environment {
     registry = 'ucha0792/testlab'
